@@ -3,14 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>huddling-test</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>서비스 이름</title>
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/base.css" />
+  <style>
+    .feature-list { display: grid; gap: var(--space-3); margin: var(--space-4) 0 0; padding: 0; list-style: none; }
+    .feature-list h2 { margin: 0 0 var(--space-1); font-size: var(--text-lg); }
+    .feature-list p { margin: 0; }
+  </style>
 </head>
 <body>
-  <main class="container">
-    <h1>huddling-test</h1>
-    <p>오프라인 밋업 팀 페이지입니다. Vercel로 배포 중이에요.</p>
-    <p>구름이가 수정했어요</p>
+  <!-- 홈은 조장만 수정. 기능이 merge되면 아래 목록에 한 줄씩 추가 -->
+  <main class="page">
+    <h1 class="page-title">서비스 이름</h1>
+    <p class="muted">우리가 쓸 것 같은 서비스, 한 줄 설명</p>
+
+    <ul class="feature-list">
+      <li>
+        <a class="card" href="features/_template/index.html">
+          <h2>예시 기능</h2>
+          <p class="muted">새 기능은 이 폴더를 복사해서 시작해요</p>
+        </a>
+      </li>
+    </ul>
   </main>
 </body>
 </html>

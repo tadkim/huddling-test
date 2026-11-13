@@ -1,0 +1,29 @@
+/* 디자인 값 — 조장만 수정. 새 값이 필요하면 PR 설명에 후보로 적기 */
+:root {
+  /* 색 */
+  --color-bg: #f6f8fb;
+  --color-surface: #ffffff;
+  --color-text: #15171c;
+  --color-text-muted: #5d6573;
+  --color-line: #e3e7ee;
+  --color-accent: #3d8bfd;
+  --color-accent-text: #ffffff;
+
+  /* 글자 */
+  --font-body: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+
+  /* 간격 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 40px;
+
+  /* 모서리 · 그림자 */
+  --radius: 12px;
+  --shadow: 0 1px 2px rgba(21, 23, 28, 0.06), 0 4px 16px rgba(21, 23, 28, 0.06);
+}

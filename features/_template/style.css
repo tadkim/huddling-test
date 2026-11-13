@@ -1,0 +1,5 @@
+/* 이 기능 전용 스타일. 값은 var(--...)만 쓰기 */
+.feature {
+  display: grid;
+  gap: var(--space-3);
+}

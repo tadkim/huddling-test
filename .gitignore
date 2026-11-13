@@ -1,0 +1,27 @@
+# 밋업 자료 (용량 큼, 커밋 금지)
+*.pdf
+*.mp4
+*.mov
+
+# 조장 개인 메모
+조장-체크리스트.md
+발표-주제-예상.md
+조장-운영-가이드.md
+아이디어-방향.md
+협업-방향-제안.md
+
+# 개인 AI 규칙 (각자 로컬에만)
+CLAUDE.local.md
+AGENTS.override.md
+
+# 환경 변수 · 키 (공개 저장소라 절대 올리지 않음)
+.env
+.env.*
+!.env.example
+*.pem
+.vercel/
+.claude/settings.local.json
+node_modules/
+
+# OS
+.DS_Store
