@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>기능 이름</title>
+  <title>내 자리</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="../../styles/tokens.css" />
   <link rel="stylesheet" href="../../styles/base.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="page">
-    <a class="back-link" href="../../index.html">← 홈으로</a>
-    <h1 class="page-title">기능 이름</h1>
-    <p class="muted">이 기능이 하는 일 한 줄</p>
-
-    <section class="card feature">
-      <button class="button" id="try-button" type="button">눌러보기</button>
-      <p id="result"></p>
+    <a class="back-link" href="../../index.html">← 작업실로</a>
+    <section class="card me">
+      <canvas id="me-char"></canvas>
+      <div>
+        <h1 class="page-title" id="me-name">내 이름</h1>
+        <p class="muted" id="me-role"></p>
+        <p id="me-says"></p>
+      </div>
     </section>
+    <!-- 여기부터 자유롭게 -->
   </main>
+  <script src="../../shared/pixel.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

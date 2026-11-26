@@ -1,0 +1,12 @@
+{
+  "name": "템",
+  "role": "조장",
+  "color": 8,
+  "hair": 1,
+  "skin": 1,
+  "status": "작업 중",
+  "says": "PR 오면 바로 merge할게요",
+  "tools": ["Claude Code", "Figma MCP"],
+  "agents": [{ "name": "리뷰봇", "says": "폴더 밖 수정 없음" }],
+  "sprite": null
+}

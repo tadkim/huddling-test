@@ -1,0 +1,156 @@
+{
+  "repo": "예시/huddling-2team",
+  "seats": [
+    {
+      "id": "jojang",
+      "me": {
+        "name": "조장",
+        "role": "조장",
+        "color": 8,
+        "hair": 1,
+        "skin": 1,
+        "status": "작업 중",
+        "says": "PR 오면 바로 merge할게요",
+        "tools": [
+          "Claude Code",
+          "GitHub"
+        ],
+        "agents": [
+          {
+            "name": "리뷰봇",
+            "says": "폴더 밖 수정 없음"
+          }
+        ]
+      }
+    },
+    {
+      "id": "momo",
+      "me": {
+        "name": "모모",
+        "role": "디자인 담당",
+        "color": 7,
+        "hair": 4,
+        "skin": 1,
+        "status": "완료",
+        "says": "색 토큰 2차 올렸어요",
+        "tools": [
+          "Claude Design",
+          "Figma MCP"
+        ],
+        "sprite": [
+          "....kkkkkkkk....",
+          "...khhhhhhhhk...",
+          "..khhhhhhhhhhk..",
+          "..khhhhhhhhhhk..",
+          "..khsssssssshk..",
+          "..kkwwkkkkwwkk..",
+          "..kskkksskkksk..",
+          "...ksssskssssk..",
+          "....kkkkkkkkk...",
+          "...kccccccccck..",
+          "..kcccwcccccck..",
+          "..ksccccccccsk..",
+          "...kcccccccck...",
+          "...kcckkkkcck...",
+          "...kkk....kkk...",
+          "................"
+        ]
+      }
+    },
+    {
+      "id": "haneul",
+      "me": {
+        "name": "하늘",
+        "role": "모아보기 담당",
+        "color": 1,
+        "hair": 2,
+        "skin": 2,
+        "status": "작업 중",
+        "says": "작업실 화면 붙이는 중",
+        "tools": [
+          "Claude Code"
+        ],
+        "sprite": [
+          "................",
+          "....kkkkkkkk....",
+          "...kcccccccck...",
+          "..kccccwwcccck..",
+          "..kkkkkkkkkkkkkk",
+          "..khsssssssshk..",
+          "..kssksssskssk..",
+          "..kssssssssssk..",
+          "...ksssskssssk..",
+          "....kkkkkkkkk...",
+          "...kwwwwwwwwwk..",
+          "..kswwwwwwwwsk..",
+          "...kwwwwwwwwk...",
+          "...kcckkkkcck...",
+          "...kkk....kkk...",
+          "................"
+        ],
+        "agents": [
+          {
+            "name": "데이터봇",
+            "says": "대기 PR 2개"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dotori",
+      "me": {
+        "name": "도토리",
+        "role": "조원",
+        "color": 3,
+        "hair": 2,
+        "skin": 2,
+        "status": "막힘",
+        "says": "push가 GH007로 막혔어요",
+        "tools": [
+          "대화만"
+        ]
+      }
+    },
+    {
+      "id": "bori",
+      "me": {
+        "name": "보리",
+        "role": "조원",
+        "color": 4,
+        "hair": 3,
+        "skin": 1,
+        "status": "작업 중",
+        "says": "Higgsfield로 내 캐릭터 뽑는 중",
+        "tools": [
+          "Higgsfield",
+          "레퍼런스 이미지"
+        ],
+        "agents": [
+          {
+            "name": "아트디렉터",
+            "says": "포즈 3안"
+          },
+          {
+            "name": "크리틱",
+            "says": "2안 통과"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gureum",
+      "me": {
+        "name": "구름",
+        "role": "조원",
+        "color": 5,
+        "hair": 1,
+        "skin": 3,
+        "status": "쉬는 중",
+        "says": "uibowl에서 레퍼런스 찾는 중",
+        "tools": [
+          "uibowl MCP"
+        ]
+      }
+    }
+  ]
+}
