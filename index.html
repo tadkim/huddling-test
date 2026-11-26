@@ -3,29 +3,197 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>서비스 이름</title>
+  <title>2팀 작업실</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css" />
   <link rel="stylesheet" href="styles/tokens.css" />
   <link rel="stylesheet" href="styles/base.css" />
   <style>
-    .feature-list { display: grid; gap: var(--space-3); margin: var(--space-4) 0 0; padding: 0; list-style: none; }
-    .feature-list h2 { margin: 0 0 var(--space-1); font-size: var(--text-lg); }
-    .feature-list p { margin: 0; }
+    /* 작업실 — 조장만 수정 */
+    body { font-family: var(--font-pixel); background: var(--pixel-wall); }
+    .top { max-width: 1120px; margin: 0 auto; padding: var(--space-4) var(--space-3) var(--space-3);
+      display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: flex-end; justify-content: space-between; }
+    .top h1 { margin: 0; font-size: var(--text-xl); letter-spacing: -0.01em; }
+    .top p { margin: var(--space-1) 0 0; color: var(--color-text-muted); font-size: var(--text-sm); }
+    .nav { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .chip { display: inline-block; padding: 6px 12px; border: 2px solid var(--pixel-ink); background: var(--pixel-white);
+      color: var(--pixel-ink); text-decoration: none; font-size: var(--text-sm); box-shadow: 3px 3px 0 var(--pixel-ink); }
+    .chip:hover { transform: translate(1px, 1px); box-shadow: 2px 2px 0 var(--pixel-ink); }
+    .chip.on { background: var(--pixel-ink); color: var(--pixel-white); }
+
+    .room { max-width: 1120px; margin: 0 auto var(--space-5); border: 4px solid var(--pixel-ink);
+      box-shadow: 8px 8px 0 var(--pixel-ink); background: var(--pixel-floor-1); }
+    .wall { position: relative; height: 112px; background:
+      repeating-linear-gradient(90deg, var(--pixel-wall) 0 46px, var(--pixel-wall-line) 46px 48px);
+      border-bottom: 4px solid var(--pixel-ink); display: flex; align-items: center; justify-content: space-between; padding: 0 var(--space-4); }
+    .sign { background: var(--pixel-ink); color: var(--pixel-white); padding: 10px 16px; font-size: var(--text-md); }
+    .sign b { color: var(--pixel-screen-on); }
+    .board { display: flex; gap: var(--space-2); flex-wrap: wrap; justify-content: flex-end; }
+    .stat { background: var(--pixel-white); border: 2px solid var(--pixel-ink); padding: 6px 10px; font-size: var(--text-sm); }
+    .stat b { font-size: var(--text-md); }
+
+    .floor { padding: var(--space-5) var(--space-4) var(--space-4);
+      background:
+        repeating-conic-gradient(var(--pixel-floor-1) 0 25%, var(--pixel-floor-2) 0 50%) 0 0 / 48px 48px;
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-5) var(--space-4); }
+    @media (max-width: 860px) { .floor { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .floor { grid-template-columns: 1fr; } }
+
+    .seat { position: relative; display: flex; flex-direction: column; align-items: center; color: inherit; text-decoration: none; padding-top: 56px; }
+    .bubble { position: absolute; top: 0; left: 50%; transform: translateX(-50%); max-width: 92%; width: max-content;
+      background: var(--pixel-white); border: 2px solid var(--pixel-ink); padding: 6px 10px; font-size: var(--text-sm); line-height: 1.4; text-align: center; }
+    .bubble::after { content: ""; position: absolute; left: 50%; bottom: -10px; width: 10px; height: 10px; margin-left: -5px;
+      background: var(--pixel-white); border-right: 2px solid var(--pixel-ink); border-bottom: 2px solid var(--pixel-ink); transform: rotate(45deg); }
+    .is-stuck .bubble { border-color: var(--status-stuck); animation: shake .5s steps(2) infinite; }
+    @keyframes shake { 50% { transform: translateX(calc(-50% + 3px)); } }
+
+    .stage { position: relative; height: 104px; display: flex; align-items: flex-end; justify-content: center; }
+    .char { image-rendering: pixelated; width: 96px; height: 96px; animation: bob 1.2s steps(2) infinite; }
+    .is-rest .char { animation-duration: 3s; }
+    .is-stuck .char { animation-duration: .5s; }
+    @keyframes bob { 50% { transform: translateY(-4px); } }
+    .agents { position: absolute; left: calc(50% + 52px); top: 0; display: flex; flex-direction: column; gap: 2px; }
+    .agent { display: flex; align-items: center; gap: 4px; font-size: 11px; white-space: nowrap; color: var(--color-text-muted); animation: float 2s steps(3) infinite; }
+    .agent:nth-child(2) { animation-delay: .6s; }
+    .agent canvas { image-rendering: pixelated; width: 24px; height: 24px; }
+    @keyframes float { 50% { transform: translateY(-3px); } }
+
+    .desk { position: relative; width: 168px; height: 40px; margin-top: -6px; background: var(--pixel-desk);
+      border: 4px solid var(--pixel-ink); box-shadow: inset 0 -8px 0 var(--pixel-desk-dark); }
+    .monitor { position: absolute; left: 50%; top: -30px; width: 44px; height: 28px; margin-left: -22px;
+      background: var(--pixel-screen); border: 3px solid var(--pixel-ink); }
+    .monitor::after { content: ""; position: absolute; inset: 4px; background: var(--pixel-screen); }
+    .is-work .monitor::after { background: var(--pixel-screen-on); animation: blink 1.4s steps(2) infinite; }
+    .is-done .monitor::after { background: var(--status-done); }
+    .is-stuck .monitor::after { background: var(--status-stuck); }
+    @keyframes blink { 50% { opacity: .55; } }
+
+    .plate { margin-top: var(--space-3); width: 100%; max-width: 260px; background: var(--pixel-white); border: 2px solid var(--pixel-ink);
+      padding: 8px 10px; display: grid; gap: 4px; }
+    .plate .who { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+    .plate .who b { font-size: var(--text-md); }
+    .plate .role { font-size: 12px; color: var(--color-text-muted); }
+    .status { font-size: 12px; padding: 1px 6px; color: var(--pixel-white); background: var(--status-rest); white-space: nowrap; }
+    .is-work .status { background: var(--status-work); }
+    .is-stuck .status { background: var(--status-stuck); }
+    .is-done .status { background: var(--status-done); }
+    .tools { display: flex; flex-wrap: wrap; gap: 4px; }
+    .tools span { font-size: 11px; border: 1px solid var(--pixel-wall-line); padding: 0 5px; color: var(--color-text-muted); }
+    .seat:hover .plate { box-shadow: 4px 4px 0 var(--pixel-ink); }
+
+    .is-ghost .char { animation: none; opacity: .9; }
+    .is-ghost .plate, .is-empty .plate { border-style: dashed; background: transparent; }
+    .is-empty .desk { opacity: .45; }
+    .is-empty .monitor { display: none; }
+    .hint { font-size: 12px; color: var(--color-text-muted); line-height: 1.5; }
+    .warn { font-size: 11px; color: var(--status-stuck); }
+
+    .foot { max-width: 1120px; margin: 0 auto var(--space-5); padding: 0 var(--space-3); font-size: var(--text-sm); color: var(--color-text-muted); }
   </style>
 </head>
 <body>
-  <!-- 홈은 조장만 수정. 기능이 merge되면 아래 목록에 한 줄씩 추가 -->
-  <main class="page">
-    <h1 class="page-title">서비스 이름</h1>
-    <p class="muted">우리가 쓸 것 같은 서비스, 한 줄 설명</p>
+  <header class="top">
+    <div>
+      <h1>2팀 작업실</h1>
+      <p id="sub">내 자리 파일(me.json)을 올리면 이 방에 내 자리가 생겨요</p>
+    </div>
+    <nav class="nav">
+      <a class="chip on" href="index.html" id="tab-real">지금 작업실</a>
+      <a class="chip" href="index.html?demo" id="tab-demo">완성 예시</a>
+      <a class="chip" href="huddle.html" id="tab-huddle">허들로 보기</a>
+      <a class="chip" href="process.html" id="tab-flow">오늘의 흐름 →</a>
+    </nav>
+  </header>
 
-    <ul class="feature-list">
-      <li>
-        <a class="card" href="features/_template/index.html">
-          <h2>예시 기능</h2>
-          <p class="muted">새 기능은 이 폴더를 복사해서 시작해요</p>
-        </a>
-      </li>
-    </ul>
+  <main class="room">
+    <div class="wall">
+      <div class="sign" id="sign">2팀 · <b>--:--</b></div>
+      <div class="board" id="board"></div>
+    </div>
+    <div class="floor" id="floor"></div>
   </main>
+
+  <p class="foot">자리 = <code>members.json</code> (조장) · 캐릭터 = <code>features/&lt;아이디&gt;/me.json</code> (각자) · 색 = <code>styles/tokens.css</code> (조장 · 디자인 담당)</p>
+
+  <script src="shared/pixel.js"></script>
+  <script>
+    const STATUS = { "작업 중": "is-work", "막힘": "is-stuck", "완료": "is-done", "쉬는 중": "is-rest" };
+    const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+    function seatHTML(seat, i) {
+      const { id, me } = seat;
+      if (!id) {
+        return `<div class="seat is-empty"><div class="bubble">빈자리</div><div class="stage"></div>
+          <div class="desk"><div class="monitor"></div></div>
+          <div class="plate"><span class="hint">${i + 1}번 자리 · 조장이 members.json에 아이디를 넣으면 예약돼요</span></div></div>`;
+      }
+      if (!me) {
+        return `<div class="seat is-ghost"><div class="bubble">아직 출근 전</div>
+          <div class="stage"><canvas class="char" data-ghost="1"></canvas></div>
+          <div class="desk"><div class="monitor"></div></div>
+          <div class="plate"><div class="who"><b>${esc(id)}</b><span class="status">예약됨</span></div>
+          <span class="hint">features/${esc(id)}/me.json을 PR로 올리면 앉아요</span></div></div>`;
+      }
+      const cls = STATUS[me.status] || "is-rest";
+      const tools = (me.tools || []).slice(0, 4).map((t) => `<span>${esc(t)}</span>`).join("");
+      const agents = (me.agents || []).slice(0, 3).map((a, k) => `<span class="agent" title="${esc(a.says || "")}"><canvas data-agent="${k}"></canvas>${esc(a.name)}</span>`).join("");
+      const sp = PIXEL.spriteOf(me);
+      return `<a class="seat ${cls}" href="features/${esc(id)}/">
+        <div class="bubble">${esc(me.says || me.status || "")}</div>
+        <div class="stage"><canvas class="char"></canvas><div class="agents">${agents}</div></div>
+        <div class="desk"><div class="monitor"></div></div>
+        <div class="plate">
+          <div class="who"><b>${esc(me.name || id)}</b><span class="status">${esc(me.status || "쉬는 중")}</span></div>
+          <span class="role">${esc(me.role || "")} · ${esc(id)}${sp.custom ? " · 직접 그린 캐릭터" : ""}</span>
+          ${tools ? `<div class="tools">${tools}</div>` : ""}
+          ${sp.invalid ? `<span class="warn">sprite가 16×16이 아니라 기본 캐릭터로 보여요</span>` : ""}
+        </div></a>`;
+    }
+
+    async function render() {
+      const demo = PIXEL.isDemo();
+      document.getElementById("tab-real").classList.toggle("on", !demo);
+      document.getElementById("tab-demo").classList.toggle("on", demo);
+      document.getElementById("tab-flow").href = demo ? "process.html?demo" : "process.html";
+      document.getElementById("tab-huddle").href = demo ? "huddle.html?demo" : "huddle.html";
+
+      let room;
+      try { room = await PIXEL.loadRoom("", demo); }
+      catch (e) {
+        document.getElementById("floor").innerHTML = `<p class="hint">작업실을 불러오지 못했어요. 파일을 더블클릭하지 말고 배포 주소나 로컬 서버로 열어주세요. (${esc(e.message)})</p>`;
+        return;
+      }
+      const floor = document.getElementById("floor");
+      floor.innerHTML = room.seats.map(seatHTML).join("");
+
+      floor.querySelectorAll(".seat").forEach((el, i) => {
+        const me = room.seats[i].me;
+        const c = el.querySelector("canvas.char");
+        if (c) PIXEL.draw(c, PIXEL.spriteOf(me).rows, PIXEL.colorsFor(me), 6, !me);
+        el.querySelectorAll("canvas[data-agent]").forEach((ac) => PIXEL.draw(ac, PIXEL.AGENT_SPRITE, PIXEL.colorsFor(me), 3));
+      });
+
+      const filled = room.seats.filter((s) => s.me);
+      const count = (st) => filled.filter((s) => s.me.status === st).length;
+      const agents = filled.reduce((n, s) => n + (s.me.agents || []).length, 0);
+      document.getElementById("board").innerHTML = [
+        ["출근", `${filled.length}/${room.seats.length}`],
+        ["작업 중", count("작업 중")],
+        ["막힘", count("막힘")],
+        ["완료", count("완료")],
+        ["에이전트 동료", agents]
+      ].map(([k, v]) => `<span class="stat">${k} <b>${v}</b></span>`).join("");
+      document.getElementById("sub").textContent = demo
+        ? "완성 예시 · 6명이 모두 앉은 모습 (예시 데이터)"
+        : `${room.repo} · 내 자리 파일(me.json)을 올리면 이 방에 내 자리가 생겨요`;
+    }
+
+    function tick() {
+      const d = new Date();
+      document.getElementById("sign").innerHTML = `2팀 · <b>${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}</b>`;
+    }
+    tick(); setInterval(tick, 10000);
+    render();
+    if (!PIXEL.isDemo()) setInterval(render, 60000);
+  </script>
 </body>
 </html>
