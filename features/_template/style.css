@@ -1,12 +1,5 @@
-/* 내 자리 전용 스타일. 값은 var(--...)만 쓰기 */
-body { font-family: var(--font-pixel); }
-.me {
-  display: flex;
-  gap: var(--space-4);
-  align-items: center;
-}
-#me-char {
-  width: 128px;
-  height: 128px;
-  image-rendering: pixelated;
+/* 이 기능 전용 스타일. 값은 var(--...)만 쓰기 */
+.feature {
+  display: grid;
+  gap: var(--space-3);
 }
