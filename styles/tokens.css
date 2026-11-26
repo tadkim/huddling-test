@@ -1,4 +1,4 @@
-/* 디자인 값 — 조장 · 디자인 담당만 PR로 수정. 새 값이 필요하면 PR 설명에 후보로 적기 */
+/* 디자인 값 — 조장만 수정. 새 값이 필요하면 PR 설명에 후보로 적기 */
 :root {
   /* 색 */
   --color-bg: #f6f8fb;
@@ -26,42 +26,4 @@
   /* 모서리 · 그림자 */
   --radius: 12px;
   --shadow: 0 1px 2px rgba(21, 23, 28, 0.06), 0 4px 16px rgba(21, 23, 28, 0.06);
-
-  /* 픽셀 작업실 — 글꼴 */
-  --font-pixel: "Galmuri11", "Galmuri9", var(--font-body);
-
-  /* 픽셀 작업실 — 캐릭터 팔레트 (me.json의 번호가 여기를 가리킴) */
-  --pixel-ink: #2b2d42;
-  --pixel-white: #fdfdfd;
-  --pixel-skin-1: #ffd9bd;
-  --pixel-skin-2: #eeb48a;
-  --pixel-skin-3: #b97e57;
-  --pixel-hair-1: #3a2e2a;
-  --pixel-hair-2: #7a4a2a;
-  --pixel-hair-3: #e3b448;
-  --pixel-hair-4: #d96a8c;
-  --pixel-color-1: #3d8bfd;
-  --pixel-color-2: #ff6b6b;
-  --pixel-color-3: #2fbf8a;
-  --pixel-color-4: #ffb547;
-  --pixel-color-5: #9b6bff;
-  --pixel-color-6: #22b8c9;
-  --pixel-color-7: #ff8fc7;
-  --pixel-color-8: #5b6475;
-
-  /* 픽셀 작업실 — 방 */
-  --pixel-wall: #dde7f4;
-  --pixel-wall-line: #c6d4e8;
-  --pixel-floor-1: #f1e8da;
-  --pixel-floor-2: #e8dcc9;
-  --pixel-desk: #c08f60;
-  --pixel-desk-dark: #8d6140;
-  --pixel-screen: #2b2d42;
-  --pixel-screen-on: #9fe8c8;
-
-  /* 픽셀 작업실 — 상태 */
-  --status-work: #2fbf8a;
-  --status-stuck: #ff6b6b;
-  --status-done: #3d8bfd;
-  --status-rest: #9aa3b5;
 }
